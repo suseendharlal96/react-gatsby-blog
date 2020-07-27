@@ -26,6 +26,7 @@ const IndexPage = () => (
                     author={node.frontmatter.author}
                     image={node.frontmatter.image.childImageSharp.fluid}
                     path={node.frontmatter.path}
+                    tags={node.frontmatter.tags}
                     body={node.excerpt}
                   />
                 ))}
@@ -51,6 +52,7 @@ const postQuery = graphql`
             title
             date(formatString: "DD-MMM-YYYY")
             author
+            tags
             image {
               childImageSharp {
                 fluid(maxWidth: 600) {
