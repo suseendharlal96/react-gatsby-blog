@@ -1,35 +1,47 @@
-import { Link } from "gatsby"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
-import React from "react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  NavbarText,
+} from "reactstrap"
+
+const Header = ({ siteTitle }) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggle = () => {
+    setIsOpen(!isOpen)
+  }
+
+  return (
+    <div>
+      <Navbar fixed="top" light expand="sm">
+        <div className="container">
+          <NavbarBrand href="/">{siteTitle}</NavbarBrand>
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} className="mr-auto" navbar>
+            <Nav className="mr-auto"></Nav>
+            <NavItem>
+              <NavLink href="/team">Team</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/tags">Tags</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/about">About</NavLink>
+            </NavItem>
+          </Collapse>
+        </div>
+      </Navbar>
     </div>
-  </header>
-)
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
