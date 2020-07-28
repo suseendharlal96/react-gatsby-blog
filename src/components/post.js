@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 import {
   Card,
@@ -7,22 +7,22 @@ import {
   CardTitle,
   CardSubtitle,
   Badge,
-} from "reactstrap"
+} from "reactstrap";
 
-import { Link } from "gatsby"
-import Img from "gatsby-image"
+import { Link } from "gatsby";
+import Img from "gatsby-image";
 
-import slugify from "../util/utilFunc"
+import slugify from "../util/utilFunc";
 
-const post = props => {
+const post = (props) => {
   return (
     <Card>
-      <Link to={props.path}>
+      <Link to={props.slug}>
         <Img className="card-image-top" fluid={props.image} />
       </Link>
       <CardBody>
         <CardTitle>
-          <Link to={props.path}>{props.title}</Link>
+          <Link to={props.slug}>{props.title}</Link>
         </CardTitle>
         <CardSubtitle>
           <span className="text-info">
@@ -34,20 +34,20 @@ const post = props => {
         </CardSubtitle>
         <CardText>{props.body}</CardText>
         <ul className="post-tags">
-          {props.tags.map(tag => (
-            <li>
+          {props.tags.map((tag, index) => (
+            <li key={index}>
               <Link to={`/tag/${slugify(tag)}`}>
                 <Badge color="primary">{tag}</Badge>
               </Link>
             </li>
           ))}
         </ul>
-        <Link to={props.path} className="btn btn-outline-primary float-right">
+        <Link to={props.slug} className="btn btn-outline-primary float-right">
           Read more
         </Link>
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
-export default post
+export default post;

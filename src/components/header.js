@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import {
   Collapse,
@@ -9,15 +9,14 @@ import {
   Nav,
   NavItem,
   NavLink,
-  NavbarText,
-} from "reactstrap"
+} from "reactstrap";
 
 const Header = ({ siteTitle }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div>
@@ -40,15 +39,15 @@ const Header = ({ siteTitle }) => {
         </div>
       </Navbar>
     </div>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-}
+};
 
-export default Header
+export default Header;
