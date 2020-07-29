@@ -14,7 +14,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="facebook"
             >
-              <i className="fa fa-facebook-f fa-lg "></i>
+              <i className="fa fa-facebook-f fa-lg"></i>
             </a>
           </li>
           <li>
@@ -24,7 +24,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="twitter"
             >
-              <i className="fa fa-twitter fa-lg    "></i>
+              <i className="fa fa-twitter fa-lg"></i>
             </a>
           </li>
           <li>
@@ -34,7 +34,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="instagram"
             >
-              <i className="fa fa-instagram fa-lg  "></i>
+              <i className="fa fa-instagram fa-lg"></i>
             </a>
           </li>
           <li>
@@ -44,7 +44,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="google"
             >
-              <i className="fa fa-google fa-lg "></i>
+              <i className="fa fa-google fa-lg"></i>
             </a>
           </li>
           <li>
@@ -54,7 +54,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="linkedin"
             >
-              <i className="fa fa-linkedin fa-lg   "></i>
+              <i className="fa fa-linkedin fa-lg"></i>
             </a>
           </li>
         </ul>

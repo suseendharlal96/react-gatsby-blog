@@ -17,12 +17,14 @@ import slugify from "../util/utilFunc";
 const post = (props) => {
   return (
     <Card>
-      <Link to={props.slug}>
+      <Link to={!props.tagPage ? props.slug : `/${props.slug}`}>
         <Img className="card-image-top" fluid={props.image} />
       </Link>
       <CardBody>
         <CardTitle>
-          <Link to={props.slug}>{props.title}</Link>
+          <Link to={!props.tagPage ? props.slug : `/${props.slug}`}>
+            {props.title}
+          </Link>
         </CardTitle>
         <CardSubtitle>
           <span className="text-info">
@@ -42,7 +44,10 @@ const post = (props) => {
             </li>
           ))}
         </ul>
-        <Link to={props.slug} className="btn btn-outline-primary float-right">
+        <Link
+          to={!props.tagPage ? props.slug : `/${props.slug}`}
+          className="btn btn-outline-primary float-right"
+        >
           Read more
         </Link>
       </CardBody>

@@ -3,12 +3,85 @@ import React, { useState } from "react";
 import { graphql, StaticQuery, Link } from "gatsby";
 import Img from "gatsby-image";
 
-import { Card, CardBody, Form, FormGroup, Input, CardTitle } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardText,
+  Form,
+  FormGroup,
+  Input,
+  CardTitle,
+} from "reactstrap";
 
-const Sidebar = () => {
+const Sidebar = ({ blogAuthor, authorImg }) => {
   const [email, setemail] = useState("");
   return (
     <div>
+      {blogAuthor && (
+        <Card>
+          <Img className="card-image-top" fluid={authorImg} />
+          <CardBody>
+            <CardTitle className="text-center text-uppercase mb-3">
+              {blogAuthor.name}
+            </CardTitle>
+            <CardText>{blogAuthor.bio}</CardText>
+            <div className="author-social-links text-center">
+              <ul>
+                <li>
+                  <a
+                    href={blogAuthor.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="facebook"
+                  >
+                    <i className="fa fa-facebook-f fa-lg "></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={blogAuthor.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="twitter"
+                  >
+                    <i className="fa fa-twitter fa-lg "></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={blogAuthor.google}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="google"
+                  >
+                    <i className="fa fa-google fa-lg "></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={blogAuthor.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="instagram"
+                  >
+                    <i className="fa fa-instagram fa-lg "></i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={blogAuthor.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="linkedin"
+                  >
+                    <i className="fa fa-linkedin fa-lg "></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </CardBody>
+        </Card>
+      )}
       <Card>
         <CardBody>
           <CardTitle className="text-center text-uppercase mb-3">

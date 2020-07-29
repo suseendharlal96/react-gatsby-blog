@@ -1,6 +1,7 @@
 const path = require("path");
 
 const slugify = require("./src/util/utilFunc");
+const authors = require("./src/util/authors");
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
@@ -16,12 +17,20 @@ exports.onCreateNode = ({ node, actions }) => {
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
-  const singlePostTemplate = path.resolve("src/components/Singlepost.js");
+  const template = {
+    single: path.resolve("src/components/Singlepost.js"),
+    tags: path.resolve("src/components/tags.js"),
+    tag: path.resolve("src/components/SingleTag.js"),
+  };
   const { data } = await graphql(`
     {
       allMarkdownRemark {
         edges {
           node {
+            frontmatter {
+              author
+              tags
+            }
             fields {
               slug
             }
@@ -30,14 +39,50 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     }
   `);
-  const posts = data.allMarkdownRemark.edges;
-  posts.forEach(({ node }) => {
+  if (data) {
+    const posts = data.allMarkdownRemark.edges;
+    posts.forEach(({ node }) => {
+      createPage({
+        path: node.fields.slug,
+        component: template.single,
+        context: {
+          slug: node.fields.slug,
+          imageurl: authors.find(
+            (a) =>
+              a.name.toLowerCase() === node.frontmatter.author.toLowerCase()
+          ).imageurl,
+        },
+      });
+    });
+
+    let tags = [];
+    posts.forEach(({ node }) => {
+      if (node && node.frontmatter.tags) {
+        tags = tags.concat(node.frontmatter.tags);
+      }
+    });
+    const uniqueTags = [...new Set(tags)];
+
+    let tagCount = {};
+    tags.forEach((tag) => {
+      tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+
     createPage({
-      path: node.fields.slug,
-      component: singlePostTemplate,
+      path: "/tags",
+      component: template.tags,
       context: {
-        slug: node.fields.slug,
+        tags: uniqueTags,
+        tagCount,
       },
     });
-  });
+
+    uniqueTags.forEach((tag) => {
+      createPage({
+        path: `/tag/${slugify(tag)}`,
+        component: template.tag,
+        context: { tag },
+      });
+    });
+  }
 };

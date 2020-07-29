@@ -1,6 +1,6 @@
 import React from "react";
 
-import { graphql, StaticQuery, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 
 import { Row, Col } from "reactstrap";
 
