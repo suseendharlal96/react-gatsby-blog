@@ -7,19 +7,20 @@ import { Row, Col } from "reactstrap";
 import Layout from "./layout";
 import Post from "./Post";
 import Sidebar from "./Sidebar";
+import SEO from "./seo";
+import PaginationPage from "./PaginationPage";
 
-const SingleTag = ({ data, pageContext }) => {
-  const { tag } = pageContext;
-  const { totalCount } = data.allMarkdownRemark;
-  const pageHeader = `${totalCount} post${
-    +totalCount > 1 ? "s" : ""
-  } tagged in ${tag}`;
+const PostPage = ({ data, pageContext }) => {
+  const posts = data.allMarkdownRemark.edges;
+  const { currentPage } = pageContext;
+  const { totalPages } = pageContext;
   return (
     <Layout>
-      <h2>{pageHeader}</h2>
+      <SEO title={`Page${currentPage}`} />
+      <PaginationPage currentPage={currentPage} totalPages={totalPages} />
       <Row>
         <Col md="8">
-          {data.allMarkdownRemark.edges.map(({ node }) => (
+          {posts.map(({ node }) => (
             <Post
               tagPage="true"
               key={node.id}
@@ -41,24 +42,24 @@ const SingleTag = ({ data, pageContext }) => {
   );
 };
 
-export const tagQuery = graphql`
-  query($tag: String!) {
+export const postPageQuery = graphql`
+  query($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      limit: $limit
+      skip: $skip
     ) {
-      totalCount
       edges {
         node {
           id
           frontmatter {
             title
+            author
             tags
             date(formatString: "DD-MMM-YYYY")
-            author
             image {
               childImageSharp {
-                fluid(maxWidth: 650, maxHeight: 150) {
+                fluid {
                   ...GatsbyImageSharpFluid
                 }
               }
@@ -74,4 +75,4 @@ export const tagQuery = graphql`
   }
 `;
 
-export default SingleTag;
+export default PostPage;

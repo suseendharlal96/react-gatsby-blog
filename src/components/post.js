@@ -24,7 +24,7 @@ const post = (props) => {
         <CardTitle>
           <Link to={!props.tagPage ? props.slug : `/${props.slug}`}>
             {props.title}
-          </Link>
+          </Link> 
         </CardTitle>
         <CardSubtitle>
           <span className="text-info">

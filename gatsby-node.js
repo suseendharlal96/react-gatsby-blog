@@ -21,6 +21,7 @@ exports.createPages = async ({ actions, graphql }) => {
     single: path.resolve("src/components/Singlepost.js"),
     tags: path.resolve("src/components/tags.js"),
     tag: path.resolve("src/components/SingleTag.js"),
+    pagination: path.resolve("src/components/PostPage.js"),
   };
   const { data } = await graphql(`
     {
@@ -83,6 +84,27 @@ exports.createPages = async ({ actions, graphql }) => {
         component: template.tag,
         context: { tag },
       });
+    });
+
+    const postsPerPage = 2;
+    const totalPages = Math.ceil(posts.length / postsPerPage);
+
+    Array.from({ length: totalPages }).map((_, index) => {
+      const currentPage = index + 1;
+      if (index === 0) {
+        return;
+      } else {
+        createPage({
+          path: `/page/${currentPage}`,
+          component: template.pagination,
+          context: {
+            limit: postsPerPage,
+            skip: index * postsPerPage,
+            currentPage,
+            totalPages
+          },
+        });
+      } 
     });
   }
 };

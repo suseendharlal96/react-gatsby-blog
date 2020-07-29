@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "reactstrap";
 
-const Sidebar = ({ blogAuthor, authorImg }) => {
+const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
   const [email, setemail] = useState("");
   return (
     <div>
@@ -115,8 +115,8 @@ const Sidebar = ({ blogAuthor, authorImg }) => {
             Advertisement
           </CardTitle>
           <img
-            src="https://via.placeholder.com/320x300"
-            alt="nice"
+            src="https://pngimg.com/uploads/github/github_PNG20.png"
+            alt="github"
             style={{ width: "100%" }}
           />
         </CardBody>
@@ -132,7 +132,13 @@ const Sidebar = ({ blogAuthor, authorImg }) => {
               <div>
                 {data.allMarkdownRemark.edges.map(({ node }) => (
                   <Card key={node.id}>
-                    <Link to={node.fields.slug}>
+                    <Link
+                      to={
+                        !tagPage
+                          ? node.fields.slug
+                          : `/${node.fields.slug}`
+                      }
+                    >
                       <Img
                         className="card-image-top"
                         fluid={node.frontmatter.image.childImageSharp.fluid}
@@ -140,7 +146,13 @@ const Sidebar = ({ blogAuthor, authorImg }) => {
                     </Link>
                     <CardBody>
                       <CardTitle>
-                        <Link to={node.fields.slug}>
+                        <Link
+                          to={
+                            !tagPage
+                              ? node.fields.slug
+                              : `/${node.fields.slug}`
+                          }
+                        >
                           {node.frontmatter.title}
                         </Link>
                       </CardTitle>

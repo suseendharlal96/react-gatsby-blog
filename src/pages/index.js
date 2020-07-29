@@ -8,11 +8,16 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Post from "../components/Post";
 import Sidebar from "../components/Sidebar";
+import PaginationPage from "../components/PaginationPage";
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 2
+      ) {
+        totalCount
         edges {
           node {
             id
@@ -42,6 +47,10 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
       <h2>Home Page</h2>
+      <PaginationPage
+        currentPage={1}
+        totalPages={Math.ceil(data.allMarkdownRemark.totalCount / 2)}
+      />
       <Row>
         <Col md="8">
           {/* <StaticQuery

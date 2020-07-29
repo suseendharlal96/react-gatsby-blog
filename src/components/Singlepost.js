@@ -124,6 +124,7 @@ const Singlepost = ({ data, pageContext }) => {
         </Col>
         <Col md="4">
           <Sidebar
+            tagPage="true"
             blogAuthor={authors.find((a) => a.name === post.author)}
             authorImg={data.file.childImageSharp.fluid}
           />
