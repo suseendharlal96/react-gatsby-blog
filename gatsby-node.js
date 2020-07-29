@@ -22,6 +22,7 @@ exports.createPages = async ({ actions, graphql }) => {
     tags: path.resolve("src/components/tags.js"),
     tag: path.resolve("src/components/SingleTag.js"),
     pagination: path.resolve("src/components/PostPage.js"),
+    authorPost: path.resolve("src/components/AuthorPage.js"),
   };
   const { data } = await graphql(`
     {
@@ -52,6 +53,17 @@ exports.createPages = async ({ actions, graphql }) => {
             (a) =>
               a.name.toLowerCase() === node.frontmatter.author.toLowerCase()
           ).imageurl,
+        },
+      });
+    });
+
+    authors.forEach((author) => {
+      createPage({
+        path: `/author/${slugify(author.name)}`,
+        component: template.authorPost,
+        context: {
+          authorName: author.name,
+          imageurl: author.imageurl,
         },
       });
     });
@@ -101,10 +113,10 @@ exports.createPages = async ({ actions, graphql }) => {
             limit: postsPerPage,
             skip: index * postsPerPage,
             currentPage,
-            totalPages
+            totalPages,
           },
         });
-      } 
+      }
     });
   }
 };

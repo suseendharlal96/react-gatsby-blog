@@ -133,11 +133,7 @@ const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
                 {data.allMarkdownRemark.edges.map(({ node }) => (
                   <Card key={node.id}>
                     <Link
-                      to={
-                        !tagPage
-                          ? node.fields.slug
-                          : `/${node.fields.slug}`
-                      }
+                      to={!tagPage ? node.fields.slug : `/${node.fields.slug}`}
                     >
                       <Img
                         className="card-image-top"
@@ -148,9 +144,7 @@ const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
                       <CardTitle>
                         <Link
                           to={
-                            !tagPage
-                              ? node.fields.slug
-                              : `/${node.fields.slug}`
+                            !tagPage ? node.fields.slug : `/${node.fields.slug}`
                           }
                         >
                           {node.frontmatter.title}
