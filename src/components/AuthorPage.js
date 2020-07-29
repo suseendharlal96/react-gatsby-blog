@@ -13,6 +13,9 @@ const AuthorPage = ({ data, pageContext }) => {
   const { authorName } = pageContext;
   return (
     <Layout>
+      <h2>
+        Blog{data.allMarkdownRemark.totalCount > 1 ? "s" : ""} posted by {authorName}
+      </h2>
       <Row>
         <Col md="8">
           {data.allMarkdownRemark.edges.map(({ node }) => (

@@ -23,7 +23,7 @@ const Team = () => {
                   color="primary"
                   href={`/author/${slugify(author.name)}`}
                 >
-                  View my Posts
+                  View my blogs
                 </Button>
               </CardBody>
             </Card>
