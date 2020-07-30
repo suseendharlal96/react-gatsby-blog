@@ -43,7 +43,7 @@ const Singlepost = ({ data, pageContext }) => {
               </ul>
             </CardBody>
           </Card>
-          <h3 className="text-center">Share this post</h3>
+          <h3 className="text-center">Share this blog</h3>
           <SocialLinks post={post} slug={pageContext.slug} id={data.post.id} />
         </Col>
         <Col md="4">
@@ -72,5 +72,31 @@ export const postQuery = graphql`
     }
   }
 `;
+
+// Second approach(alternative to file we can use allFile)
+
+// export const postQuery = graphql`
+//   query singlePostQuery($slug: String!, $imageurl: String!) {
+//     post: markdownRemark(fields: { slug: { eq: $slug } }) {
+//       ...MyMarkdown
+//     }
+//     allFile(
+//       filter: {
+//         sourceInstanceName: { eq: "images" }
+//         relativePath: { eq: "elon.jpg" }
+//       }
+//     ) {
+//       edges {
+//         node {
+//           childImageSharp {
+//             fluid {
+//               originalName
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export default Singlepost;

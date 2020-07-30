@@ -8,6 +8,7 @@ import Sidebar from "../components/Sidebar";
 import Post from "../components/Post";
 import Layout from "../components/layout";
 import authors from "../util/authors";
+import SEO from "../components/seo";
 
 const AuthorPage = ({ data, pageContext }) => {
   const { authorName } = pageContext;
@@ -16,6 +17,7 @@ const AuthorPage = ({ data, pageContext }) => {
       <h2>
         Blog{data.authors.totalCount > 1 ? "s" : ""} posted by {authorName}
       </h2>
+      <SEO title={authorName + "'s blog"} />
       <Row>
         <Col md="8">
           {data.authors.edges.map(({ node }) => (

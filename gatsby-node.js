@@ -22,7 +22,7 @@ exports.createPages = async ({ actions, graphql }) => {
     tags: path.resolve("src/templates/tags.js"),
     tag: path.resolve("src/templates/SingleTag.js"),
     pagination: path.resolve("src/templates/PostPage.js"),
-    team: path.resolve("src/templates/team.js"),
+    // team: path.resolve("src/templates/team.js"),
     authorPost: path.resolve("src/templates/AuthorPage.js"),
   };
   const { data } = await graphql(`
@@ -58,15 +58,15 @@ exports.createPages = async ({ actions, graphql }) => {
       });
     });
 
-    authors.forEach((author) => {
-      createPage({
-        path: '/team',
-        component: template.team,
-        context: {
-          imageurl: author.blog,
-        },
-      });
-    });
+    // authors.forEach((author) => {
+    //   createPage({
+    //     path: '/team',
+    //     component: template.team,
+    //     context: {
+    //       imageurl: author.blog,
+    //     },
+    //   });
+    // });
 
     authors.forEach((author) => {
       createPage({
