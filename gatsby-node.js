@@ -22,6 +22,7 @@ exports.createPages = async ({ actions, graphql }) => {
     tags: path.resolve("src/components/tags.js"),
     tag: path.resolve("src/components/SingleTag.js"),
     pagination: path.resolve("src/components/PostPage.js"),
+    team: path.resolve("src/components/team.js"),
     authorPost: path.resolve("src/components/AuthorPage.js"),
   };
   const { data } = await graphql(`
@@ -53,6 +54,16 @@ exports.createPages = async ({ actions, graphql }) => {
             (a) =>
               a.name.toLowerCase() === node.frontmatter.author.toLowerCase()
           ).imageurl,
+        },
+      });
+    });
+
+    authors.forEach((author) => {
+      createPage({
+        path: '/team',
+        component: template.team,
+        context: {
+          imageurl: author.blog,
         },
       });
     });

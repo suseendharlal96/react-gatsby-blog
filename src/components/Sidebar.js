@@ -114,11 +114,17 @@ const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
           <CardTitle className="text-center text-uppercase">
             Advertisement
           </CardTitle>
-          <img
-            src="https://pngimg.com/uploads/github/github_PNG20.png"
-            alt="github"
-            style={{ width: "100%" }}
-          />
+          <a
+            target="_blank"
+            href="https://github.com"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://pngimg.com/uploads/github/github_PNG20.png"
+              alt="github"
+              style={{ width: "100%" }}
+            />
+          </a>
         </CardBody>
       </Card>
       <Card>

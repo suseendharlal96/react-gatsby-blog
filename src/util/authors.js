@@ -2,6 +2,7 @@ const authors = [
   {
     name: "Elon",
     imageurl: "elon.jpg",
+    blog: "write.jpg",
     bio: "Front end developer who loves to code and coffee",
     facebook: "https://www.facebook.com",
     twitter: "https://www.twitter.com",
@@ -12,6 +13,7 @@ const authors = [
   {
     name: "Steve",
     imageurl: "steve.jpg",
+    blog: "write.jpg",
     bio: "ios developer who loves swift",
     facebook: "https://www.facebook.com",
     twitter: "https://www.twitter.com",
@@ -22,6 +24,7 @@ const authors = [
   {
     name: "Mark",
     imageurl: "mark.jpg",
+    blog: "write.jpg",
     bio: "MERN developer who loves REACT",
     facebook: "https://www.facebook.com",
     twitter: "https://www.twitter.com",
