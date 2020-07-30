@@ -14,8 +14,7 @@ const AuthorPage = ({ data, pageContext }) => {
   return (
     <Layout>
       <h2>
-        Blog{data.authors.totalCount > 1 ? "s" : ""} posted by{" "}
-        {authorName}
+        Blog{data.authors.totalCount > 1 ? "s" : ""} posted by {authorName}
       </h2>
       <Row>
         <Col md="8">
@@ -54,7 +53,7 @@ export const authorQuery = graphql`
       ...MyAllMarkdown
     }
     file(relativePath: { eq: $imageurl }) {
-      childImageSharp {
+      img: childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
         }

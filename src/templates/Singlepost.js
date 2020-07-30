@@ -64,7 +64,7 @@ export const postQuery = graphql`
       ...MyMarkdown
     }
     file(relativePath: { eq: $imageurl }) {
-      childImageSharp {
+      img: childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
         }
