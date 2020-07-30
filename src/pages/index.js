@@ -13,33 +13,11 @@ import PaginationPage from "../components/PaginationPage";
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(
+      posts: allMarkdownRemark(
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 2
       ) {
-        totalCount
-        edges {
-          node {
-            id
-            frontmatter {
-              title
-              date(formatString: "DD-MMM-YYYY")
-              author
-              tags
-              image {
-                childImageSharp {
-                  fluid(maxWidth: 600) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-            }
-            fields {
-              slug
-            }
-            excerpt
-          }
-        }
+        ...MyAllMarkdown
       }
     }
   `);
@@ -49,7 +27,7 @@ const IndexPage = () => {
       <h2>Home Page</h2>
       <PaginationPage
         currentPage={1}
-        totalPages={Math.ceil(data.allMarkdownRemark.totalCount / 2)}
+        totalPages={Math.ceil(data.posts.totalCount / 2)}
       />
       <Row>
         <Col md="8">
@@ -58,13 +36,13 @@ const IndexPage = () => {
           render={(data) => {
             return ( */}
           <div>
-            {data.allMarkdownRemark.edges.map(({ node }) => (
+            {data.posts.edges.map(({ node }) => (
               <Post
                 key={node.id}
                 title={node.frontmatter.title}
                 date={node.frontmatter.date}
                 author={node.frontmatter.author}
-                image={node.frontmatter.image.childImageSharp.fluid}
+                image={node.frontmatter.image.img.fluid}
                 slug={node.fields.slug}
                 tags={node.frontmatter.tags}
                 body={node.excerpt}

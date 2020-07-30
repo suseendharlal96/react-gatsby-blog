@@ -11,7 +11,7 @@ import SEO from "../components/seo";
 import PaginationPage from "../components/PaginationPage";
 
 const PostPage = ({ data, pageContext }) => {
-  const posts = data.allMarkdownRemark.edges;
+  const posts = data.posts.edges;
   const { currentPage } = pageContext;
   const { totalPages } = pageContext;
   return (
@@ -27,7 +27,7 @@ const PostPage = ({ data, pageContext }) => {
               title={node.frontmatter.title}
               date={node.frontmatter.date}
               author={node.frontmatter.author}
-              image={node.frontmatter.image.childImageSharp.fluid}
+              image={node.frontmatter.image.img.fluid}
               slug={node.fields.slug}
               tags={node.frontmatter.tags}
               body={node.excerpt}
@@ -44,33 +44,12 @@ const PostPage = ({ data, pageContext }) => {
 
 export const postPageQuery = graphql`
   query($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(
+    posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
     ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            author
-            tags
-            date(formatString: "DD-MMM-YYYY")
-            image {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          excerpt
-          fields {
-            slug
-          }
-        }
-      }
+      ...MyAllMarkdown
     }
   }
 `;

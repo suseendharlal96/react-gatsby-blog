@@ -14,18 +14,19 @@ const AuthorPage = ({ data, pageContext }) => {
   return (
     <Layout>
       <h2>
-        Blog{data.allMarkdownRemark.totalCount > 1 ? "s" : ""} posted by {authorName}
+        Blog{data.authors.totalCount > 1 ? "s" : ""} posted by{" "}
+        {authorName}
       </h2>
       <Row>
         <Col md="8">
-          {data.allMarkdownRemark.edges.map(({ node }) => (
+          {data.authors.edges.map(({ node }) => (
             <Post
               tagPage="true"
               key={node.id}
               title={node.frontmatter.title}
               date={node.frontmatter.date}
               author={node.frontmatter.author}
-              image={node.frontmatter.image.childImageSharp.fluid}
+              image={node.frontmatter.image.img.fluid}
               slug={node.fields.slug}
               tags={node.frontmatter.tags}
               body={node.excerpt}
@@ -36,7 +37,7 @@ const AuthorPage = ({ data, pageContext }) => {
           <Sidebar
             tagPage="true"
             blogAuthor={authors.find((a) => a.name === authorName)}
-            authorImg={data.file.childImageSharp.fluid}
+            authorImg={data.file.img.fluid}
           />
         </Col>
       </Row>
@@ -46,33 +47,11 @@ const AuthorPage = ({ data, pageContext }) => {
 
 export const authorQuery = graphql`
   query($authorName: String!, $imageurl: String!) {
-    allMarkdownRemark(
+    authors: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { author: { eq: $authorName } } }
     ) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            date(formatString: "DD-MM-YYYY")
-            tags
-            author
-            image {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          excerpt
-          fields {
-            slug
-          }
-        }
-      }
+      ...MyAllMarkdown
     }
     file(relativePath: { eq: $imageurl }) {
       childImageSharp {

@@ -10,7 +10,7 @@ import Sidebar from "../components/Sidebar";
 
 const SingleTag = ({ data, pageContext }) => {
   const { tag } = pageContext;
-  const { totalCount } = data.allMarkdownRemark;
+  const { totalCount } = data.tags;
   const pageHeader = `${totalCount} post${
     +totalCount > 1 ? "s" : ""
   } tagged in ${tag}`;
@@ -19,14 +19,14 @@ const SingleTag = ({ data, pageContext }) => {
       <h2>{pageHeader}</h2>
       <Row>
         <Col md="8">
-          {data.allMarkdownRemark.edges.map(({ node }) => (
+          {data.tags.edges.map(({ node }) => (
             <Post
               tagPage="true"
               key={node.id}
               title={node.frontmatter.title}
               date={node.frontmatter.date}
               author={node.frontmatter.author}
-              image={node.frontmatter.image.childImageSharp.fluid}
+              image={node.frontmatter.image.img.fluid}
               slug={node.fields.slug}
               tags={node.frontmatter.tags}
               body={node.excerpt}
@@ -43,33 +43,11 @@ const SingleTag = ({ data, pageContext }) => {
 
 export const tagQuery = graphql`
   query($tag: String!) {
-    allMarkdownRemark(
+    tags: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            tags
-            date(formatString: "DD-MMM-YYYY")
-            author
-            image {
-              childImageSharp {
-                fluid(maxWidth: 650, maxHeight: 150) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          excerpt
-          fields {
-            slug
-          }
-        }
-      }
+      ...MyAllMarkdown
     }
   }
 `;

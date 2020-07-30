@@ -136,14 +136,14 @@ const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
             query={sideBarQuery}
             render={(data) => (
               <div>
-                {data.allMarkdownRemark.edges.map(({ node }) => (
+                {data.posts.edges.map(({ node }) => (
                   <Card key={node.id}>
                     <Link
                       to={!tagPage ? node.fields.slug : `/${node.fields.slug}`}
                     >
                       <Img
                         className="card-image-top"
-                        fluid={node.frontmatter.image.childImageSharp.fluid}
+                        fluid={node.frontmatter.image.img.fluid}
                       ></Img>
                     </Link>
                     <CardBody>
@@ -170,28 +170,11 @@ const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
 
 const sideBarQuery = graphql`
   query {
-    allMarkdownRemark(
+    posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 3
     ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            image {
-              childImageSharp {
-                fluid(maxWidth: 300) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
-        }
-      }
+      ...MyAllMarkdown
     }
   }
 `;
