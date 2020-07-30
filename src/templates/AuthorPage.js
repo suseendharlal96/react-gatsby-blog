@@ -4,9 +4,9 @@ import { graphql } from "gatsby";
 
 import { Row, Col } from "reactstrap";
 
-import Sidebar from "./Sidebar";
-import Post from "./Post";
-import Layout from "./layout";
+import Sidebar from "../components/Sidebar";
+import Post from "../components/Post";
+import Layout from "../components/layout";
 import authors from "../util/authors";
 
 const AuthorPage = ({ data, pageContext }) => {

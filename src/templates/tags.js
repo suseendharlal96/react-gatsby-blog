@@ -2,8 +2,8 @@ import React from "react";
 
 import { Badge, Button } from "reactstrap";
 
-import Layout from "./layout";
-import Seo from "./seo";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 import slugify from "../util/utilFunc";
 
 const Tags = ({ pageContext }) => {

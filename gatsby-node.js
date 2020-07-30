@@ -18,12 +18,12 @@ exports.onCreateNode = ({ node, actions }) => {
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
   const template = {
-    single: path.resolve("src/components/Singlepost.js"),
-    tags: path.resolve("src/components/tags.js"),
-    tag: path.resolve("src/components/SingleTag.js"),
-    pagination: path.resolve("src/components/PostPage.js"),
-    team: path.resolve("src/components/team.js"),
-    authorPost: path.resolve("src/components/AuthorPage.js"),
+    single: path.resolve("src/templates/Singlepost.js"),
+    tags: path.resolve("src/templates/tags.js"),
+    tag: path.resolve("src/templates/SingleTag.js"),
+    pagination: path.resolve("src/templates/PostPage.js"),
+    team: path.resolve("src/templates/team.js"),
+    authorPost: path.resolve("src/templates/AuthorPage.js"),
   };
   const { data } = await graphql(`
     {

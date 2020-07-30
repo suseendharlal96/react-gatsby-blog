@@ -4,9 +4,9 @@ import { graphql } from "gatsby";
 
 import { Row, Col } from "reactstrap";
 
-import Layout from "./layout";
-import Post from "./Post";
-import Sidebar from "./Sidebar";
+import Layout from "../components/layout";
+import Post from "../components/Post";
+import Sidebar from "../components/Sidebar";
 
 const SingleTag = ({ data, pageContext }) => {
   const { tag } = pageContext;

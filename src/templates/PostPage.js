@@ -4,11 +4,11 @@ import { graphql } from "gatsby";
 
 import { Row, Col } from "reactstrap";
 
-import Layout from "./layout";
-import Post from "./Post";
-import Sidebar from "./Sidebar";
-import SEO from "./seo";
-import PaginationPage from "./PaginationPage";
+import Layout from "../components/layout";
+import Post from "../components/Post";
+import Sidebar from "../components/Sidebar";
+import SEO from "../components/seo";
+import PaginationPage from "../components/PaginationPage";
 
 const PostPage = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;

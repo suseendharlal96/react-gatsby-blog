@@ -6,11 +6,11 @@ import Img from "gatsby-image";
 import { Card, CardBody, CardSubtitle, Badge, Row, Col } from "reactstrap";
 
 import slugify from "../util/utilFunc";
-import Layout from "./layout";
-import SEO from "./seo";
-import Sidebar from "./Sidebar";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import Sidebar from "../components/Sidebar";
 import authors from "../util/authors";
-import SocialLinks from "./SocialLinks";
+import SocialLinks from "../components/SocialLinks";
 
 const Singlepost = ({ data, pageContext }) => {
   const post = data.markdownRemark.frontmatter;

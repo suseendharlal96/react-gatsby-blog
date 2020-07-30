@@ -5,8 +5,8 @@ import Img from "gatsby-image";
 
 import { Row, Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 
-import Layout from "./layout";
-import Seo from "./seo";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 import slugify from "../util/utilFunc";
 import authors from "../util/authors";
 
@@ -45,7 +45,7 @@ export const authorQuery = graphql`
   query($imageurl: String!) {
     file(relativePath: { eq: $imageurl }) {
       childImageSharp {
-        fluid(maxHeight: 15) {
+        fluid {
           ...GatsbyImageSharpFluid
         }
       }
