@@ -136,7 +136,7 @@ const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
             query={sideBarQuery}
             render={(data) => (
               <div>
-                {data.posts.edges.map(({ node }) => (
+                {data.posts.nodes.map((node) => (
                   <Card key={node.id}>
                     <Link
                       to={!tagPage ? node.fields.slug : `/${node.fields.slug}`}

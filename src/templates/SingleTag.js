@@ -7,6 +7,7 @@ import { Row, Col } from "reactstrap";
 import Layout from "../components/layout";
 import Post from "../components/Post";
 import Sidebar from "../components/Sidebar";
+import SEO from "../components/seo";
 
 const SingleTag = ({ data, pageContext }) => {
   const { tag } = pageContext;
@@ -17,9 +18,10 @@ const SingleTag = ({ data, pageContext }) => {
   return (
     <Layout>
       <h2>{pageHeader}</h2>
+      <SEO title={tag} />
       <Row>
         <Col md="8">
-          {data.tags.edges.map(({ node }) => (
+          {data.tags.nodes.map((node) => (
             <Post
               tagPage="true"
               key={node.id}

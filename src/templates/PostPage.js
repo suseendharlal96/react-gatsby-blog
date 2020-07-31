@@ -11,7 +11,7 @@ import SEO from "../components/seo";
 import PaginationPage from "../components/PaginationPage";
 
 const PostPage = ({ data, pageContext }) => {
-  const posts = data.posts.edges;
+  const posts = data.posts.nodes;
   const { currentPage } = pageContext;
   const { totalPages } = pageContext;
   return (
@@ -20,7 +20,7 @@ const PostPage = ({ data, pageContext }) => {
       <PaginationPage currentPage={currentPage} totalPages={totalPages} />
       <Row>
         <Col md="8">
-          {posts.map(({ node }) => (
+          {posts.map((node) => (
             <Post
               tagPage="true"
               key={node.id}

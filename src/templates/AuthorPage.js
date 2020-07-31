@@ -12,6 +12,7 @@ import SEO from "../components/seo";
 
 const AuthorPage = ({ data, pageContext }) => {
   const { authorName } = pageContext;
+  console.log(data)
   return (
     <Layout>
       <h2>
@@ -20,7 +21,7 @@ const AuthorPage = ({ data, pageContext }) => {
       <SEO title={authorName + "'s blog"} />
       <Row>
         <Col md="8">
-          {data.authors.edges.map(({ node }) => (
+          {data.authors.nodes.map((node) => (
             <Post
               tagPage="true"
               key={node.id}

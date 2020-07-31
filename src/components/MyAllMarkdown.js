@@ -3,27 +3,29 @@ import { graphql } from "gatsby";
 export const myAllMarkdown = graphql`
   fragment MyAllMarkdown on MarkdownRemarkConnection {
     totalCount
-    edges {
-      node {
-        id
-        frontmatter {
-          title
-          date(formatString: "DD-MMM-YYYY")
-          author
-          tags
-          image {
-            img: childImageSharp {
-              fluid(maxWidth: 600) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        fields {
-          slug
-        }
-        excerpt
+    nodes {
+      ...MyMarkdown
+      fields {
+        slug
       }
+      excerpt
     }
   }
 `;
+
+// You can get edges if u want to
+
+// export const myAllMarkdown = graphql`
+//   fragment MyAllMarkdown on MarkdownRemarkConnection {
+//     totalCount
+//     edges {
+//       node {
+//         ...MyMarkdown
+//         fields {
+//           slug
+//         }
+//         excerpt
+//       }
+//     }
+//   }
+// `;

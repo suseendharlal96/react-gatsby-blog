@@ -24,7 +24,7 @@ const post = (props) => {
         <CardTitle>
           <Link to={!props.tagPage ? props.slug : `/${props.slug}`}>
             {props.title}
-          </Link> 
+          </Link>
         </CardTitle>
         <CardSubtitle>
           <span className="text-info">
@@ -34,7 +34,7 @@ const post = (props) => {
           by {"  "}
           <span className="text-info">{props.author}</span>
         </CardSubtitle>
-        <CardText>{props.body}</CardText>
+        <CardText >{props.body}</CardText>
         <ul className="post-tags">
           {props.tags.map((tag, index) => (
             <li key={index}>

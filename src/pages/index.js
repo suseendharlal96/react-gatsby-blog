@@ -21,6 +21,7 @@ const IndexPage = () => {
       }
     }
   `);
+  console.log(data);
   return (
     <Layout>
       <SEO title="Home" />
@@ -36,7 +37,7 @@ const IndexPage = () => {
           render={(data) => {
             return ( */}
           <div>
-            {data.posts.edges.map(({ node }) => (
+            {data.posts.nodes.map((node) => (
               <Post
                 key={node.id}
                 title={node.frontmatter.title}
