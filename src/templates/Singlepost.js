@@ -29,7 +29,9 @@ const Singlepost = ({ data, pageContext }) => {
                   {"  "}
                 </span>
                 by {"  "}
-                <span className="text-info">{post.author}</span>
+                <Link to={`/author/${slugify(post.author)}`}>
+                  <span className="text-info">{post.author}</span>
+                </Link>
               </CardSubtitle>
               <div dangerouslySetInnerHTML={{ __html: data.post.html }} />
               <ul className="post-tags">

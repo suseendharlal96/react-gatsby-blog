@@ -13,17 +13,23 @@ import {
   CardTitle,
 } from "reactstrap";
 
+import slugify from "../util/utilFunc";
+
 const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
   const [email, setemail] = useState("");
   return (
     <div>
       {blogAuthor && (
         <Card>
-          <Img className="card-image-top" fluid={authorImg} />
+          <Link to={`/author/${slugify(blogAuthor.name)}`}>
+            <Img className="card-image-top" fluid={authorImg} />
+          </Link>
           <CardBody>
-            <CardTitle className="text-center text-uppercase mb-3">
-              {blogAuthor.name}
-            </CardTitle>
+            <Link to={`/author/${slugify(blogAuthor.name)}`}>
+              <CardTitle className="text-center text-uppercase mb-3">
+                {blogAuthor.name}
+              </CardTitle>
+            </Link>
             <CardText>{blogAuthor.bio}</CardText>
             <div className="author-social-links text-center">
               <ul>
