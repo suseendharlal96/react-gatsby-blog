@@ -6,7 +6,7 @@ import { Row, Col } from "reactstrap";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import Post from "../components/Post";
+import PostTemp from "../components/PostTemp";
 import Sidebar from "../components/Sidebar";
 import PaginationPage from "../components/PaginationPage";
 
@@ -38,7 +38,7 @@ const IndexPage = () => {
             return ( */}
           <div>
             {data.posts.nodes.map((node) => (
-              <Post
+              <PostTemp
                 key={node.id}
                 title={node.frontmatter.title}
                 date={node.frontmatter.date}

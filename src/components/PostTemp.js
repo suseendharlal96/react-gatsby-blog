@@ -14,7 +14,7 @@ import Img from "gatsby-image";
 
 import slugify from "../util/utilFunc";
 
-const Post = (props) => {
+const PostTemp = (props) => {
   return (
     <Card>
       <Link to={!props.tagPage ? props.slug : `/${props.slug}`}>
@@ -55,4 +55,4 @@ const Post = (props) => {
   );
 };
 
-export default Post;
+export default PostTemp;

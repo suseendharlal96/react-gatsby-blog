@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 import { Row, Col } from "reactstrap";
 
 import Layout from "../components/layout";
-import Post from "../components/Post";
+import PostTemp from "../components/PostTemp";
 import Sidebar from "../components/Sidebar";
 import SEO from "../components/seo";
 
@@ -22,7 +22,7 @@ const SingleTag = ({ data, pageContext }) => {
       <Row>
         <Col md="8">
           {data.tags.nodes.map((node) => (
-            <Post
+            <PostTemp
               tagPage="true"
               key={node.id}
               title={node.frontmatter.title}
