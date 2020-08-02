@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 import { Row, Col } from "reactstrap";
 
 import Sidebar from "../components/Sidebar";
-import Post from "../components/Post";
+import PostTemp from "../components/Post";
 import Layout from "../components/layout";
 import authors from "../util/authors";
 import SEO from "../components/seo";
@@ -22,7 +22,7 @@ const AuthorPage = ({ data, pageContext }) => {
       <Row>
         <Col md="8">
           {data.authors.nodes.map((node) => (
-            <Post
+            <PostTemp
               tagPage="true"
               key={node.id}
               title={node.frontmatter.title}
