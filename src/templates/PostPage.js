@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 import { Row, Col } from "reactstrap";
 
 import Layout from "../components/layout";
-import PostTemp from "../components/Post";
+import PostTemp from "../components/PostTemp";
 import Sidebar from "../components/Sidebar";
 import SEO from "../components/seo";
 import PaginationPage from "../components/PaginationPage";
