@@ -12,7 +12,6 @@ import SEO from "../components/seo";
 
 const AuthorPage = ({ data, pageContext }) => {
   const { authorName } = pageContext;
-  console.log(data)
   return (
     <Layout>
       <h2>

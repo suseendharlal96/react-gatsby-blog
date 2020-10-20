@@ -11,7 +11,6 @@ import PaginationPage from "../components/PaginationPage";
 
 const tagPagination = ({ data, pageContext }) => {
   const { tag, totalPages, currentPage, tagCount } = pageContext;
-  console.log(tag);
   const pageHeader = `${tagCount} post${
     +tagCount > 1 ? "s" : ""
   } tagged in ${tag}`;
