@@ -1,8 +1,7 @@
 import React from "react";
 
 import { graphql } from "gatsby";
-
-import { Row, Col, Tag } from "reactstrap";
+import { Row, Col } from "reactstrap";
 
 import Layout from "../components/layout";
 import PostTemp from "../components/PostTemp";
@@ -10,23 +9,26 @@ import Sidebar from "../components/Sidebar";
 import SEO from "../components/seo";
 import PaginationPage from "../components/PaginationPage";
 
-const SingleTag = ({ data, pageContext }) => {
-  const { tag } = pageContext;
-  const { totalCount } = data.tags;
-  const pageHeader = `${totalCount} post${
-    +totalCount > 1 ? "s" : ""
+const tagPagination = ({ data, pageContext }) => {
+  const { tag, totalPages, currentPage, tagCount } = pageContext;
+  console.log(tag);
+  const pageHeader = `${tagCount} post${
+    +tagCount > 1 ? "s" : ""
   } tagged in ${tag}`;
-  const totalPages = Math.ceil(totalCount / 2);
   return (
     <Layout>
       <h2>{pageHeader}</h2>
-      {totalCount > 2 && (
-        <PaginationPage currentPage={1} totalPages={totalPages} tag={tag} />
+      {tagCount > 2 && (
+        <PaginationPage
+          currentPage={currentPage}
+          totalPages={totalPages}
+          tag={tag}
+        />
       )}
       <SEO title={tag} />
       <Row>
         <Col md="8">
-          {data.tags.nodes.slice(0, 2).map((node) => (
+          {data.allMarkdownRemark.nodes.map((node) => (
             <PostTemp
               tagPage="true"
               key={node.id}
@@ -48,12 +50,16 @@ const SingleTag = ({ data, pageContext }) => {
   );
 };
 
-export const tagQuery = graphql`
-  query($tag: String!) {
-    tags: allMarkdownRemark(filter: { frontmatter: { tags: { in: [$tag] } } }) {
+export const tagPaginationQuery = graphql`
+  query($tag: String!, $skip: Int!, $limit: Int!) {
+    allMarkdownRemark(
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+      skip: $skip
+      limit: $limit
+    ) {
       ...MyAllMarkdown
     }
   }
 `;
 
-export default SingleTag;
+export default tagPagination;

@@ -22,6 +22,7 @@ exports.createPages = async ({ actions, graphql }) => {
     tags: path.resolve("src/templates/tags.js"),
     tag: path.resolve("src/templates/SingleTag.js"),
     pagination: path.resolve("src/templates/PostPage.js"),
+    tagPagination: path.resolve("src/templates/tagPagination.js"),
     // team: path.resolve("src/templates/team.js"),
     authorPost: path.resolve("src/templates/AuthorPage.js"),
   };
@@ -44,6 +45,7 @@ exports.createPages = async ({ actions, graphql }) => {
   `);
   if (data) {
     const posts = data.allMarkdownRemark.edges;
+    // single post page
     posts.forEach(({ node }) => {
       createPage({
         path: node.fields.slug,
@@ -58,16 +60,7 @@ exports.createPages = async ({ actions, graphql }) => {
       });
     });
 
-    // authors.forEach((author) => {
-    //   createPage({
-    //     path: '/team',
-    //     component: template.team,
-    //     context: {
-    //       imageurl: author.blog,
-    //     },
-    //   });
-    // });
-
+    // author page with corresponding posts
     authors.forEach((author) => {
       createPage({
         path: `/author/${slugify(author.name)}`,
@@ -79,6 +72,7 @@ exports.createPages = async ({ actions, graphql }) => {
       });
     });
 
+    // all tags page
     let tags = [];
     posts.forEach(({ node }) => {
       if (node && node.frontmatter.tags) {
@@ -91,7 +85,6 @@ exports.createPages = async ({ actions, graphql }) => {
     tags.forEach((tag) => {
       tagCount[tag] = (tagCount[tag] || 0) + 1;
     });
-
     createPage({
       path: "/tags",
       component: template.tags,
@@ -101,6 +94,7 @@ exports.createPages = async ({ actions, graphql }) => {
       },
     });
 
+    // single tags page
     uniqueTags.forEach((tag) => {
       createPage({
         path: `/tag/${slugify(tag)}`,
@@ -108,6 +102,8 @@ exports.createPages = async ({ actions, graphql }) => {
         context: { tag },
       });
     });
+
+    // pagination for posts
 
     const postsPerPage = 2;
     const totalPages = Math.ceil(posts.length / postsPerPage);
@@ -127,6 +123,37 @@ exports.createPages = async ({ actions, graphql }) => {
             totalPages,
           },
         });
+      }
+    });
+
+    // pagination if a same tag appears more than twice
+    let allTags = {};
+    tags.forEach((tag) => {
+      allTags[tag] = (allTags[tag] || 0) + 1;
+      if (allTags[tag] > 2) {
+        const tagsPerPage = 2;
+        const totalTagsPages = Math.ceil(allTags[tag] / tagsPerPage);
+        Array(totalTagsPages)
+          .fill()
+          .map((_, index) => {
+            const currentPage = index + 1;
+            if (currentPage === 1) {
+              return;
+            } else {
+              createPage({
+                path: `/tags/${slugify(tag)}/${currentPage}`,
+                component: template.tagPagination,
+                context: {
+                  skip: index * tagsPerPage,
+                  limit: tagsPerPage,
+                  tag,
+                  totalPages: totalTagsPages,
+                  tagCount: allTags[tag],
+                  currentPage,
+                },
+              });
+            }
+          });
       }
     });
   }

@@ -6,6 +6,7 @@ image: "../../images/jscript.jpg"
 tags:
   - web development
   - coding
+  - react
 ---
 
 This section is dedicated to the JavaScript language itself, and not the parts that are specific to Web pages or other host environments. For information about API specifics to Web pages, please see Web APIs and DOM.

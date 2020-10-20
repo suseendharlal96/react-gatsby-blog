@@ -2,11 +2,22 @@ import React from "react";
 
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
-const PaginationPage = ({ currentPage, totalPages }) => {
+import slugify from "../util/utilFunc";
+
+const PaginationPage = ({ currentPage, totalPages, tag }) => {
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPages;
-  const prevPage = currentPage - 1 === 1 ? "/" : `/page/${currentPage - 1}`;
-  const nextPage = `/page/${currentPage + 1}`;
+  const prevPage =
+    currentPage - 1 === 1
+      ? tag
+        ? `/tag/${slugify(tag)}/`
+        : "/"
+      : tag
+      ? `/tags/${slugify(tag)}/${currentPage - 1}`
+      : `/page/${currentPage - 1}`;
+  const nextPage = tag
+    ? `/tags/${slugify(tag)}/${currentPage + 1}`
+    : `/page/${currentPage + 1}`;
   return (
     <Pagination aria-label="Page navigation example">
       {isFirst ? (
@@ -22,7 +33,15 @@ const PaginationPage = ({ currentPage, totalPages }) => {
         currentPage === index + 1 ? (
           <PaginationItem active key={index}>
             <PaginationLink
-              href={`${index === 0 ? "/" : `/page/${index + 1}`}`}
+              href={`${
+                index === 0
+                  ? tag
+                    ? `/tag/${slugify(tag)}/`
+                    : "/"
+                  : tag
+                  ? `/tags/${slugify(tag)}/${index + 1}`
+                  : `/page/${index + 1}`
+              }`}
             >
               {index + 1}
             </PaginationLink>
@@ -30,7 +49,15 @@ const PaginationPage = ({ currentPage, totalPages }) => {
         ) : (
           <PaginationItem key={index}>
             <PaginationLink
-              href={`${index === 0 ? "/" : `/page/${index + 1}`}`}
+              href={`${
+                index === 0
+                  ? tag
+                    ? `/tag/${slugify(tag)}/`
+                    : "/"
+                  : tag
+                  ? `/tags/${slugify(tag)}/${index + 1}`
+                  : `/page/${index + 1}`
+              }`}
             >
               {index + 1}
             </PaginationLink>
