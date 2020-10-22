@@ -11,6 +11,8 @@ import {
   NavLink,
 } from "reactstrap";
 
+import "./header.css";
+
 const Header = ({ siteTitle }) => {
   const [isOpen, setIsOpen] = useState(false);
 
