@@ -122,7 +122,7 @@ const Sidebar = ({ blogAuthor, authorImg, tagPage }) => {
           </CardTitle>
           <a
             target="_blank"
-            href="https://github.com"
+            href="https://github.com/suseendharlal96"
             rel="noopener noreferrer"
           >
             <img

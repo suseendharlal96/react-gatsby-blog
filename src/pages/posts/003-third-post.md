@@ -2,7 +2,7 @@
 title: "Swift for ios"
 date: 2020-07-27 10:00:00
 author: "Steve"
-image: "../../images/code2.jpg"
+image: "../../images/code3.png"
 tags:
   - web development
   - deployment
