@@ -1,5 +1,6 @@
 .container#content {
-  margin-top: 10%;
+  position: relative;
+  top: 55px;
 }
 body {
   background-color: $light-gray;
